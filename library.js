@@ -23,13 +23,18 @@ function displayBooks() {
         const bookDiv = document.createElement('div');
         bookDiv.classList.add('book');
         const title  = document.createElement('p');
+        title.setAttribute("class", "book-info");
         const author = document.createElement('p');
+        author.setAttribute("class", "book-info");
         const numberOfPages = document.createElement('p');
+        numberOfPages.setAttribute("class", "book-info");
         const read = document.createElement('p');
+        read.setAttribute("class", "book-info");
         
         const removeButton = document.createElement('button');
-        removeButton.textContent = "Remove book"; 
+        removeButton.textContent = "x"; 
         removeButton.setAttribute("id", i);
+        removeButton.setAttribute("class", "remove-button")
         removeButton.addEventListener('click', function(event) {
             myLibrary.splice(event.target.id, 1);
             displayBooks();
@@ -38,6 +43,7 @@ function displayBooks() {
         const readButton = document.createElement('button');
         readButton.textContent = "Change read status";
         readButton.setAttribute("id", i);
+        readButton.setAttribute("class", "book-info");
         readButton.addEventListener('click', function(event) {
             myLibrary[event.target.id].read = !myLibrary[event.target.id].read;
             displayBooks();
@@ -52,13 +58,14 @@ function displayBooks() {
         bookDiv.appendChild(author);
         bookDiv.appendChild(numberOfPages);
         bookDiv.appendChild(read);
+        bookDiv.appendChild(removeButton);
+        bookDiv.appendChild(readButton);
 
-        const buttonContainer = document.createElement('div');
-        buttonContainer.classList.add('button-container');
-        buttonContainer.appendChild(removeButton);
-        buttonContainer.appendChild(readButton);
+            // buttonContainer.classList.add('button-container');
+            // buttonContainer.appendChild(removeButton);
+            // buttonContainer.appendChild(readButton);
 
-        bookDiv.appendChild(buttonContainer);
+            // bookDiv.appendChild(buttonContainer);
         bookContainer.appendChild(bookDiv);
     }
 }
