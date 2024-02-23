@@ -21,10 +21,12 @@ function displayBooks() {
     for(let i = 0; i < myLibrary.length; i++) {
         const book = myLibrary[i];
         const bookDiv = document.createElement('div');
+        bookDiv.classList.add('book');
         const title  = document.createElement('p');
         const author = document.createElement('p');
         const numberOfPages = document.createElement('p');
         const read = document.createElement('p');
+        
         const removeButton = document.createElement('button');
         removeButton.textContent = "Remove book"; 
         removeButton.setAttribute("id", i);
@@ -33,17 +35,30 @@ function displayBooks() {
             displayBooks();
         });
  
+        const readButton = document.createElement('button');
+        readButton.textContent = "Change read status";
+        readButton.setAttribute("id", i);
+        readButton.addEventListener('click', function(event) {
+            myLibrary[event.target.id].read = !myLibrary[event.target.id].read;
+            displayBooks();
+        });
+
         title.appendChild(document.createTextNode("Title: " + book.title));
         author.appendChild(document.createTextNode("Author: " + book.author));
         numberOfPages.appendChild(document.createTextNode("Number of pages: " + book.numberOfPages));
         read.appendChild(document.createTextNode("Read: " + book.read));
-        
+
         bookDiv.appendChild(title);
         bookDiv.appendChild(author);
         bookDiv.appendChild(numberOfPages);
         bookDiv.appendChild(read);
-        bookDiv.appendChild(removeButton);
-        
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('button-container');
+        buttonContainer.appendChild(removeButton);
+        buttonContainer.appendChild(readButton);
+
+        bookDiv.appendChild(buttonContainer);
         bookContainer.appendChild(bookDiv);
     }
 }
